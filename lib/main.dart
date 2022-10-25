@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:getx_provider_management/provider/list_provider.dart';
 import 'package:getx_provider_management/screens/getx_management.dart';
+
 import 'package:getx_provider_management/screens/provider_management.dart';
 import 'package:provider/provider.dart';
 
@@ -23,51 +25,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(),
+      // home: const ProviderManagement(),
+      home: const GetXManagement(),
     );
-  }
-}
-
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text('State management'),
-        ),
-        body: Column(
-          children: [
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (ctx) {
-                      return const ProviderManagement();
-                    },
-                  ));
-                },
-                child: const Text('Provider')),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (ctx) {
-                      return const GetXManagement();
-                    },
-                  ));
-                },
-                child: const Text('GetX')),
-          ],
-        ));
   }
 }
