@@ -8,14 +8,19 @@ class MainController extends GetxController {
   /// on the receiver side where you use this count variable you need to wrap it with Obx Widget
   var count = 0.obs;
 
-  increaseValue(){
+  increaseValue() {
     count++;
+  }
+
+  decreaseValue() {
+    count--;
+    refresh();
   }
 
 
   var countForBuilder = 0;
   increaseValueWithBuilderPattern() {
-    count++;
+    countForBuilder++;
     refresh();
   }
 
