@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:getx_provider_management/provider/list_provider.dart';
-import 'package:getx_provider_management/screens/detail_page.dart';
+import 'package:getx_provider_management/screens/getx_management.dart';
+import 'package:getx_provider_management/screens/provider_management.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-      ChangeNotifierProvider(
-        create: (_) => ListProvider(),
-        child: const MyApp(),
-      ),
+    ChangeNotifierProvider(
+      create: (_) => ListProvider(),
+      child: const MyApp(),
+    ),
     // MultiProvider(providers: [
     // ChangeNotifierProvider(
     //   create: (_) => ListProvider(),
     // )
-  // ], child: const MyApp()),
+    // ], child: const MyApp()),
   );
 }
 
@@ -42,46 +43,31 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    var favouritesList = context.watch<ListProvider>().itemsList;
-    var provider = Provider.of<ListProvider>(context);
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(context, MaterialPageRoute(
-            builder: (ctx) {
-              return const DetailPage();
-            },
-          ));
-          // Navigator.of(context).push(MaterialPageRoute(
-          //   builder: (ctx) {
-          //     return const DetailPage();
-          //   },
-          // ));
-        },
-      ),
-      appBar: AppBar(
-        title: Text('Selected Items ${favouritesList.length}'),
-      ),
-      body: ListView.builder(
-        itemBuilder: (ctx, index) {
-          return ListTile(
-            title: Text('List Item $index'),
-            trailing: GestureDetector(
-                onTap: () {
-                  if (!favouritesList.contains(index)) {
-                    provider.addItem(index);
-                  } else {
-                    provider.removeItem(index);
-                  }
+        appBar: AppBar(
+          title: const Text('State management'),
+        ),
+        body: Column(
+          children: [
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (ctx) {
+                      return const ProviderManagement();
+                    },
+                  ));
                 },
-                child: Icon(
-                  Icons.favorite,
-                  color: favouritesList.contains(index) ? Colors.red : Colors.grey,
-                )),
-          );
-        },
-        itemCount: 21,
-      ),
-    );
+                child: const Text('Provider')),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (ctx) {
+                      return const GetXManagement();
+                    },
+                  ));
+                },
+                child: const Text('GetX')),
+          ],
+        ));
   }
 }
