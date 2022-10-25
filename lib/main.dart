@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:getx_provider_management/provider/ListProvider.dart';
+import 'package:getx_provider_management/provider/list_provider.dart';
 import 'package:getx_provider_management/screens/detail_page.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-      // ChangeNotifierProvider(
-      //   create: (_) => ListProvider(),
-      //   child: const MyApp(),
-      // ),
-      MultiProvider(providers: [
-    ChangeNotifierProvider(
-      create: (_) => ListProvider(),
-    )
-  ], child: const MyApp()));
+      ChangeNotifierProvider(
+        create: (_) => ListProvider(),
+        child: const MyApp(),
+      ),
+    // MultiProvider(providers: [
+    // ChangeNotifierProvider(
+    //   create: (_) => ListProvider(),
+    // )
+  // ], child: const MyApp()),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -44,6 +45,20 @@ class _HomePageState extends State<HomePage> {
     var favouritesList = context.watch<ListProvider>().itemsList;
     var provider = Provider.of<ListProvider>(context);
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(
+            builder: (ctx) {
+              return const DetailPage();
+            },
+          ));
+          // Navigator.of(context).push(MaterialPageRoute(
+          //   builder: (ctx) {
+          //     return const DetailPage();
+          //   },
+          // ));
+        },
+      ),
       appBar: AppBar(
         title: Text('Selected Items ${favouritesList.length}'),
       ),
@@ -66,15 +81,6 @@ class _HomePageState extends State<HomePage> {
           );
         },
         itemCount: 21,
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute(
-            builder: (ctx) {
-              return const DetailPage();
-            },
-          ));
-        },
       ),
     );
   }
