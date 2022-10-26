@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:getx_provider_management/controller/getx_controller.dart';
 import 'package:getx_provider_management/screens/getx_detail_page.dart';
 
@@ -29,16 +28,20 @@ class GetXManagement extends StatelessWidget {
           onPressed: controller.increaseValue,
           child: const Text('Increase Value'),
         ),
-        ElevatedButton(
-          onPressed: () => Get.to(() => const GetXDetailPage()),
+         ElevatedButton(
+          onPressed: () => Get.to(() => const GetXDetailPage(),transition: Transition.downToUp,duration: const Duration(seconds: 2)),
           child: const Text('Change Screen'),
         ),
         ElevatedButton(
           onPressed: () {
-            Get.changeTheme(ThemeData.dark());
+            Get.changeTheme(ThemeData.light());
           },
           child: const Text('Change Theme'),
         ),
+
+        /// there are also some components like snackBar(), defaultDialog()
+        /// Get.snackbar('Snackbar Title', 'Snackbar text')
+        /// Get.defaultDialog();
       ],
     );
   }
